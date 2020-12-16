@@ -46,6 +46,7 @@ func NewBadgerDB(file string) (*BadgerDB, error) {
 	opts.Logger = nil
 	opts.WithSyncWrites(false)
 	opts.WithNumCompactors(20)
+	opts.WithBlockCacheSize(1 << 16)
 
 	if err := os.MkdirAll(file, os.ModePerm); err != nil {
 		return nil, err
