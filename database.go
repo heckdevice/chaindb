@@ -71,6 +71,16 @@ func (db *BadgerDB) Path() string {
 	return db.config.DataDir
 }
 
+// ClearAll deletes all data in the database
+func (db *BadgerDB) ClearAll() error {
+	return db.db.DropAll()
+}
+
+// ClearPrefix deletes all data in the database where the key has the given prefix
+func (db *BadgerDB) ClearPrefix(prefix []byte) error {
+	return db.db.DropPrefix(prefix)
+}
+
 // Batch struct contains a database instance, key-value mapping for batch writes and length of item value for batch write
 type batchWriter struct {
 	db   *BadgerDB

@@ -27,6 +27,8 @@ type Database interface {
 	Writer
 	io.Closer
 
+	ClearAll() error
+	ClearPrefix([]byte) error
 	NewBatch() Batch
 	Path() string
 	NewIterator() Iterator

@@ -18,8 +18,8 @@ package chaindb
 
 import (
 	"bytes"
-
 	"context"
+	"errors"
 
 	log "github.com/ChainSafe/log15"
 	"github.com/dgraph-io/badger/v2"
@@ -41,6 +41,16 @@ type tableBatch struct {
 // string.
 func NewTable(db Database, prefix string) Database {
 	return &table{db: db, prefix: prefix}
+}
+
+// ClearAll deletes all data from the database with the table prefix
+func (dt *table) ClearAll() error {
+	return dt.db.ClearPrefix([]byte(dt.prefix))
+}
+
+// ClearPrefix deletes all data in the database where the key has the given prefix
+func (db *table) ClearPrefix(prefix []byte) error {
+	return errors.New("unimplemented")
 }
 
 // Put adds keys with the prefix value given to NewTable
